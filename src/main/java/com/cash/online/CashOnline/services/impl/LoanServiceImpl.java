@@ -1,7 +1,10 @@
 package com.cash.online.CashOnline.services.impl;
 
 import com.cash.online.CashOnline.model.DaoUser;
+import com.cash.online.CashOnline.model.Loan;
 import com.cash.online.CashOnline.model.dto.LoanDTO;
+import com.cash.online.CashOnline.model.dto.LoanPageDTO;
+import com.cash.online.CashOnline.model.dto.PagingDTO;
 import com.cash.online.CashOnline.repository.LoanRepository;
 import com.cash.online.CashOnline.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +13,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import com.cash.online.CashOnline.services.LoanService;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class LoanServiceImpl implements LoanService {
@@ -18,24 +24,35 @@ public class LoanServiceImpl implements LoanService {
     private final LoanRepository loanRepository;
     private final UserRepository userRepository;
 
-    @Autowired
     public LoanServiceImpl(LoanRepository loanRepository, UserRepository userRepository) {
         this.loanRepository = loanRepository;
         this.userRepository = userRepository;
     }
 
     @Override
-    public Page<LoanDTO> getLoans(Integer page, Integer size, Long userId) {
+    public LoanPageDTO getLoans(Integer page, Integer size, Long userId) {
+        List<LoanDTO> loanPageDTOList;
+        long totalElements;
         if(userId == null) {
-            this.loanRepository.findAll(PageRequest.of(page, size));
+            Page<Loan> pageLoan = this.loanRepository.findAll(PageRequest.of(page, size));
+            totalElements = pageLoan.getTotalElements();
+            loanPageDTOList = pageLoan.get()
+                    .map(loan -> new LoanDTO(loan))
+                    .collect(Collectors.toList());
         }
         else {
             Optional<DaoUser> user = this.userRepository.findById(userId);
             if(!user.isPresent()) {
-                return null;
+                throw new RuntimeException("User not found");
             }
-            this.loanRepository.findAllByUser(user.get(), PageRequest.of(page, size));
+            Page<Loan> pageLoan = this.loanRepository.findAllByUser(user.get(), PageRequest.of(page, size));
+            totalElements = pageLoan.getTotalElements();
+            loanPageDTOList = pageLoan.get()
+                    .map(loan -> new LoanDTO(loan))
+                    .collect(Collectors.toList());
         }
-        return null;
+
+        return new LoanPageDTO(loanPageDTOList, new PagingDTO(size, page, totalElements));
+
     }
 }

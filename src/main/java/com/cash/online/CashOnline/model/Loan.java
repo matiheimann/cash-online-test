@@ -14,8 +14,20 @@ public class Loan {
     private long id;
 
     @NotBlank
-    private double total;
+    private int total;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private DaoUser user;
+
+    public long getId() {
+        return id;
+    }
+
+    public DaoUser getUser() {
+        return user;
+    }
+
+    public int getTotal() {
+        return total;
+    }
 }

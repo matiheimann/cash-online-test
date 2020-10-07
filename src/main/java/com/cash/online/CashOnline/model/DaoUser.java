@@ -5,12 +5,16 @@ import org.hibernate.annotations.SQLDelete;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
 public class DaoUser {
 
-    public DaoUser() {}
+    public DaoUser() {
+        this.loans = new HashSet<>();
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,4 +29,32 @@ public class DaoUser {
 
     @NotBlank
     private String lastName;
+
+    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JoinColumn(name = "user_id")
+    private Set<Loan> loans;
+
+    public long getId() {
+        return id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public Set<Loan> getLoans() {
+        return loans;
+    }
+
+    public void addLoan(Loan loan) {
+        this.loans.add(loan);
+    }
 }
