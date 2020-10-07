@@ -41,11 +41,7 @@ public class LoanServiceImpl implements LoanService {
                     .collect(Collectors.toList());
         }
         else {
-            Optional<DaoUser> user = this.userRepository.findById(userId);
-            if(!user.isPresent()) {
-                throw new RuntimeException("User not found");
-            }
-            Page<Loan> pageLoan = this.loanRepository.findAllByUser(user.get(), PageRequest.of(page, size));
+            Page<Loan> pageLoan = this.loanRepository.findAllByUserId(userId, PageRequest.of(page, size));
             totalElements = pageLoan.getTotalElements();
             loanPageDTOList = pageLoan.get()
                     .map(loan -> new LoanDTO(loan))

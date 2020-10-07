@@ -5,4 +5,6 @@ import com.cash.online.CashOnline.model.dto.UserDTO;
 
 public interface UserService {
     UserDTO getUserById(Long id);
+    DaoUser saveUser(DaoUser user);
+    void removeUser(Long userId);
 }

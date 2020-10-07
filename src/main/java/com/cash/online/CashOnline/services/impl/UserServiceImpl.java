@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 @Service
 public class UserServiceImpl implements UserService {
 
-
     private final UserRepository userRepository;
     private final LoanRepository loanRepository;
 
@@ -33,5 +32,18 @@ public class UserServiceImpl implements UserService {
                 .map(loan -> new LoanDTO(loan))
                 .collect(Collectors.toSet());
         return new UserDTO(user, loans);
+    }
+
+    @Override
+    public DaoUser saveUser(DaoUser user) {
+        if(this.userRepository.findByEmail(user.getEmail()).isPresent()) {
+            throw new RuntimeException("Email used");
+        }
+        return this.userRepository.save(user);
+    }
+
+    @Override
+    public void removeUser(Long userId) {
+        this.userRepository.deleteById(userId);
     }
 }

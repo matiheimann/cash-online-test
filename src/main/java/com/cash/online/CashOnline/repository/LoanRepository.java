@@ -13,5 +13,5 @@ import java.util.List;
 
 @Repository
 public interface LoanRepository extends PagingAndSortingRepository<Loan, Long> {
-    Page<Loan> findAllByUser(DaoUser user, Pageable pageable);
+    Page<Loan> findAllByUserId(long user, Pageable pageable);
 }
