@@ -1,0 +1,14 @@
+/Users/matias/IdeaProjects/cash_online_test/src/main/java/com/cash/online/CashOnline/controllers/UserController.java
+/Users/matias/IdeaProjects/cash_online_test/src/main/java/com/cash/online/CashOnline/services/impl/LoanServiceImpl.java
+/Users/matias/IdeaProjects/cash_online_test/src/main/java/com/cash/online/CashOnline/model/dto/UserDTO.java
+/Users/matias/IdeaProjects/cash_online_test/src/main/java/com/cash/online/CashOnline/services/UserService.java
+/Users/matias/IdeaProjects/cash_online_test/src/main/java/com/cash/online/CashOnline/CashOnlineApplication.java
+/Users/matias/IdeaProjects/cash_online_test/src/main/java/com/cash/online/CashOnline/model/dto/LoanDTO.java
+/Users/matias/IdeaProjects/cash_online_test/src/main/java/com/cash/online/CashOnline/security/WebSecurityConfig.java
+/Users/matias/IdeaProjects/cash_online_test/src/main/java/com/cash/online/CashOnline/services/impl/UserServiceImpl.java
+/Users/matias/IdeaProjects/cash_online_test/src/main/java/com/cash/online/CashOnline/model/Loan.java
+/Users/matias/IdeaProjects/cash_online_test/src/main/java/com/cash/online/CashOnline/controllers/LoanController.java
+/Users/matias/IdeaProjects/cash_online_test/src/main/java/com/cash/online/CashOnline/repository/UserRepository.java
+/Users/matias/IdeaProjects/cash_online_test/src/main/java/com/cash/online/CashOnline/model/DaoUser.java
+/Users/matias/IdeaProjects/cash_online_test/src/main/java/com/cash/online/CashOnline/services/LoanService.java
+/Users/matias/IdeaProjects/cash_online_test/src/main/java/com/cash/online/CashOnline/repository/LoanRepository.java

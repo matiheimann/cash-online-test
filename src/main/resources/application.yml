@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: cash-online
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: create
+
+---
+
+spring:
+  profiles: local
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/cash_online
+    username: mheimann
+    password: password
+    driver-class-name: org.postgresql.Driver
+
+
+
+
+
