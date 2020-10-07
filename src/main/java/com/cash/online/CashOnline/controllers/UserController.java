@@ -4,6 +4,7 @@ package com.cash.online.CashOnline.controllers;
 import com.cash.online.CashOnline.model.DaoUser;
 import com.cash.online.CashOnline.model.dto.UserDTO;
 import com.cash.online.CashOnline.services.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,8 +23,10 @@ public class UserController {
     }
 
     @PostMapping(value = "")
-    public DaoUser newUser(@RequestBody DaoUser newUser) {return this.userService.saveUser(newUser);}
+    @ResponseStatus(HttpStatus.CREATED)
+    public void newUser(@RequestBody DaoUser newUser) {this.userService.saveUser(newUser);}
 
     @DeleteMapping(value = "/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUser(@PathVariable Long id) { this.userService.removeUser(id); }
 }

@@ -30,7 +30,7 @@ public class DaoUser {
     @NotBlank
     private String lastName;
 
-    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "user_id")
     private Set<Loan> loans;
 

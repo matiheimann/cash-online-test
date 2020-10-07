@@ -9,12 +9,16 @@ public class Loan {
 
     public Loan() {}
 
+    public Loan(double total, DaoUser user) {
+        this.total = total;
+        this.user = user;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotBlank
-    private int total;
+    private double total;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private DaoUser user;
@@ -27,7 +31,7 @@ public class Loan {
         return user;
     }
 
-    public int getTotal() {
+    public double getTotal() {
         return total;
     }
 }

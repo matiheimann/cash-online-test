@@ -4,6 +4,7 @@ import com.cash.online.CashOnline.model.DaoUser;
 import com.cash.online.CashOnline.model.Loan;
 import com.cash.online.CashOnline.model.dto.LoanDTO;
 import com.cash.online.CashOnline.model.dto.LoanPageDTO;
+import com.cash.online.CashOnline.model.dto.LoanToAddDTO;
 import com.cash.online.CashOnline.model.dto.PagingDTO;
 import com.cash.online.CashOnline.repository.LoanRepository;
 import com.cash.online.CashOnline.repository.UserRepository;
@@ -48,7 +49,24 @@ public class LoanServiceImpl implements LoanService {
                     .collect(Collectors.toList());
         }
 
-        return new LoanPageDTO(loanPageDTOList, new PagingDTO(size, page, totalElements));
+        return new LoanPageDTO(loanPageDTOList, new PagingDTO(loanPageDTOList.size(), page, totalElements));
+    }
 
+    @Override
+    public LoanDTO addLoan(LoanToAddDTO loan) {
+        if(loan.getTotal() < 0) {
+            throw new RuntimeException("Invalid amount");
+        }
+        DaoUser user = this.userRepository.findById(loan.getUserId())
+                .orElseThrow(() -> new RuntimeException("User doesn't exist"));
+
+        user.addLoan(new Loan(loan.getTotal(), user));
+        this.userRepository.save(user);
+        return null;
+    }
+
+    @Override
+    public void deleteLoan(Long id) {
+        this.loanRepository.deleteById(id);
     }
 }
