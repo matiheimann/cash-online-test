@@ -14,7 +14,7 @@ public class Loan {
     private long id;
 
     @NotBlank
-    private int total;
+    private double total;
 
     @ManyToOne
     private DaoUser user;
