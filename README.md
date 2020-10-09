@@ -4,7 +4,7 @@
 # Requerimientos basicos
    - JDK 1.8
    - Maven 3.2+
-   - Python 3+ (para la carga masiva de datos)
+   - Python 3+ (para la carga masiva de datos y tests)
 
 # Instrucciones para levantar la API
   - Modificar datos de la base de datos en src/main/resources/application.yml (nombre de la base de datos, usuario y contraseña)
