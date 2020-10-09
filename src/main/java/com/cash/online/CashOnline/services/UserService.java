@@ -2,9 +2,10 @@ package com.cash.online.CashOnline.services;
 
 import com.cash.online.CashOnline.model.DaoUser;
 import com.cash.online.CashOnline.model.dto.UserDTO;
+import org.springframework.http.ResponseEntity;
 
 public interface UserService {
-    UserDTO getUserById(Long id);
-    DaoUser saveUser(DaoUser user);
+    ResponseEntity<UserDTO> getUserById(Long id);
+    ResponseEntity<DaoUser> saveUser(DaoUser user);
     void removeUser(Long userId);
 }

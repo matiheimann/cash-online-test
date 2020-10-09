@@ -8,9 +8,10 @@ import com.cash.online.CashOnline.model.dto.LoanToAddDTO;
 import com.cash.online.CashOnline.model.dto.PagingDTO;
 import com.cash.online.CashOnline.repository.LoanRepository;
 import com.cash.online.CashOnline.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.cash.online.CashOnline.services.LoanService;
 
@@ -31,8 +32,11 @@ public class LoanServiceImpl implements LoanService {
     }
 
     @Override
-    public LoanPageDTO getLoans(Integer page, Integer size, Long userId) {
+    public ResponseEntity<LoanPageDTO> getLoans(Integer page, Integer size, Long userId) {
         List<LoanDTO> loanPageDTOList;
+        if(page == null || size == null || page <= 0 || size <= 0) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         long totalElements;
         if(userId == null) {
             Page<Loan> pageLoan = this.loanRepository.findAll(PageRequest.of(page, size));
@@ -49,20 +53,24 @@ public class LoanServiceImpl implements LoanService {
                     .collect(Collectors.toList());
         }
 
-        return new LoanPageDTO(loanPageDTOList, new PagingDTO(loanPageDTOList.size(), page, totalElements));
+        return new ResponseEntity(new LoanPageDTO(loanPageDTOList, new PagingDTO(loanPageDTOList.size(), page, totalElements)),
+                HttpStatus.ACCEPTED);
     }
 
     @Override
-    public LoanDTO addLoan(LoanToAddDTO loan) {
+    public ResponseEntity<LoanDTO> addLoan(LoanToAddDTO loan) {
         if(loan.getTotal() < 0) {
-            throw new RuntimeException("Invalid amount");
+            new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        DaoUser user = this.userRepository.findById(loan.getUserId())
-                .orElseThrow(() -> new RuntimeException("User doesn't exist"));
-
+        Optional<DaoUser> userOptional = this.userRepository.findById(loan.getUserId());
+        if(!userOptional.isPresent()) {
+            new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        DaoUser user = userOptional.get();
         user.addLoan(new Loan(loan.getTotal(), user));
-        this.userRepository.save(user);
-        return null;
+        DaoUser modifiedUser = this.userRepository.save(user);
+        List<Loan> newLoans = new LinkedList<>(modifiedUser.getLoans());
+        return new ResponseEntity<>(new LoanDTO(newLoans.get(newLoans.size() - 1)), HttpStatus.ACCEPTED);
     }
 
     @Override

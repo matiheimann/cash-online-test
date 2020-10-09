@@ -8,6 +8,7 @@ import com.cash.online.CashOnline.services.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,16 +24,15 @@ public class LoanController {
     }
 
     @GetMapping("")
-    public LoanPageDTO getLoansByPage(@RequestParam(defaultValue = "0") Integer page,
-                                      @RequestParam(defaultValue = "50") Integer size,
-                                      @RequestParam(defaultValue = "") Long userId) {
+    public ResponseEntity<LoanPageDTO> getLoansByPage(@RequestParam(defaultValue = "") Integer page,
+                                                     @RequestParam(defaultValue = "") Integer size,
+                                                     @RequestParam(defaultValue = "") Long userId) {
         return this.loanService.getLoans(page, size, userId);
     }
 
     @PostMapping("")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void createLoan(@RequestBody LoanToAddDTO loan) {
-        this.loanService.addLoan(loan);
+    public ResponseEntity<LoanDTO> createLoan(@RequestBody LoanToAddDTO loan) {
+        return this.loanService.addLoan(loan);
     }
 
     @DeleteMapping("/{id}")

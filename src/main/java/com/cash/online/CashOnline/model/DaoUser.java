@@ -6,6 +6,8 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -13,11 +15,12 @@ import java.util.Set;
 public class DaoUser {
 
     public DaoUser() {
-        this.loans = new HashSet<>();
+        this.loans = new LinkedList<>();
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "serial")
     private long id;
 
     @NotBlank
@@ -32,7 +35,7 @@ public class DaoUser {
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "user_id")
-    private Set<Loan> loans;
+    private List<Loan> loans;
 
     public long getId() {
         return id;
@@ -50,7 +53,7 @@ public class DaoUser {
         return lastName;
     }
 
-    public Set<Loan> getLoans() {
+    public List<Loan> getLoans() {
         return loans;
     }
 
