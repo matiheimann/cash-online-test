@@ -10,6 +10,8 @@ if __name__ == '__main__':
     names = list(map(lambda name:
         f"('{name[0]}', '{name[1]}', '{name[0] + '_' + name[1]}@gmail.com')", names
     ))
+    
+    #Modify database information used for the API here
     connection = psycopg2.connect(user="matias",
                                     password="password",
                                     host="localhost",
