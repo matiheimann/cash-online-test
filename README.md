@@ -17,6 +17,13 @@
   - La base de datos ya debe estar creada con las dos tablas correspondientes. No hace falta que la API este levantada.
   - Se recomienda realizar la carga con la base de datos vacia sin que se hayan borrado elementos previamente. 
   - Modificar los datos de la base de datos
-  - Ejecutar comandos:
+  - Ejecutar comandos en la terminal:
       - source venv/bin/activate
       - python3 script_database.py
+      
+  # Instrucciones para correr tests
+   - La API ya debe estar levantada
+   - Modificar los datos de la base de datos en la funcion database settings
+   - Ejecutar comandos comandos en la terminal:
+      -source venv/bin/activate
+      -pytest -vs api_automation.py
