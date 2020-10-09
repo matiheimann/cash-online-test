@@ -1,4 +1,5 @@
 # Cash online API
+   Informacion basica de como levantar la API y como ejecutar ciertos scripts.
 
 # Requerimientos basicos
    - JDK 1.8
