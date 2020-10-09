@@ -15,6 +15,7 @@
   
  # Instrucciones para carga masiva
   - La base de datos ya debe estar creada con las dos tablas correspondientes. No hace falta que la API este levantada.
+  - Se recomienda realizar la carga con la base de datos vacia sin que se hayan borrado elementos previamente. 
   - Se deben instalar las librerias requests y psycopg2 con los siguientes comandos:
     - pip3 install psycopg2
     - pip3 install requests
