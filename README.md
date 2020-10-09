@@ -25,5 +25,5 @@
    - La API ya debe estar levantada
    - Modificar los datos de la base de datos en la funcion database settings
    - Ejecutar comandos comandos en la terminal:
-      -source venv/bin/activate
-      -pytest -vs api_automation.py
+         -source venv/bin/activate
+         -pytest -vs api_automation.py
