@@ -32,7 +32,7 @@ public class LoanController {
 
     @PostMapping("")
     public ResponseEntity<LoanDTO> createLoan(@RequestBody LoanToAddDTO loan) {
-        this.loanService.addLoan(loan);
+        return this.loanService.addLoan(loan);
     }
 
     @DeleteMapping("/{id}")
