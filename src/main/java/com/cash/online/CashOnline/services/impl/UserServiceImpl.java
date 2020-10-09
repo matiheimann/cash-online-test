@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
     public ResponseEntity<UserDTO> getUserById(Long id) {
         Optional<DaoUser> user = this.userRepository.findById(id);
         if(!user.isPresent()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         Set<LoanDTO> loans = user.get().getLoans()
                 .stream()

@@ -26,19 +26,19 @@ public class LoanController {
     @GetMapping("")
     public ResponseEntity<LoanPageDTO> getLoansByPage(@RequestParam(defaultValue = "") Integer page,
                                                      @RequestParam(defaultValue = "") Integer size,
-                                                     @RequestParam(defaultValue = "") Long userId) {
+                                                     @RequestParam(defaultValue = "", name = "user_id") Long userId) {
         return this.loanService.getLoans(page, size, userId);
     }
 
     @PostMapping("")
     public ResponseEntity<LoanDTO> createLoan(@RequestBody LoanToAddDTO loan) {
-        return this.loanService.addLoan(loan);
+        this.loanService.addLoan(loan);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteLoan(@PathVariable Long id){
-
+        this.loanService.deleteLoan(id);
     }
 
 }
