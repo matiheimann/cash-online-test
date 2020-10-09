@@ -74,7 +74,12 @@ public class LoanServiceImpl implements LoanService {
     }
 
     @Override
-    public void deleteLoan(Long id) {
+    public ResponseEntity<Loan> deleteLoan(Long id) {
+        Optional<Loan> loan = this.loanRepository.findById(id);
+        if(!loan.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         this.loanRepository.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

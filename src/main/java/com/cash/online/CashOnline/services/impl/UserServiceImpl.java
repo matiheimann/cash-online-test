@@ -47,7 +47,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void removeUser(Long userId) {
+    public ResponseEntity<DaoUser> removeUser(Long userId) {
+        Optional<DaoUser> user = this.userRepository.findById(userId);
+        if(!user.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         this.userRepository.deleteById(userId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

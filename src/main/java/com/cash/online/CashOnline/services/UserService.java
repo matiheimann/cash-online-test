@@ -7,5 +7,5 @@ import org.springframework.http.ResponseEntity;
 public interface UserService {
     ResponseEntity<UserDTO> getUserById(Long id);
     ResponseEntity<DaoUser> saveUser(DaoUser user);
-    void removeUser(Long userId);
+    ResponseEntity<DaoUser> removeUser(Long userId);
 }

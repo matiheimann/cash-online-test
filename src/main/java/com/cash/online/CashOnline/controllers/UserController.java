@@ -29,6 +29,5 @@ public class UserController {
     public ResponseEntity<DaoUser> newUser(@RequestBody DaoUser newUser) { return this.userService.saveUser(newUser);}
 
     @DeleteMapping(value = "/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteUser(@PathVariable Long id) { this.userService.removeUser(id); }
+    public ResponseEntity<DaoUser> deleteUser(@PathVariable Long id) { return this.userService.removeUser(id); }
 }
