@@ -54,7 +54,7 @@ public class LoanServiceImpl implements LoanService {
         }
 
         return new ResponseEntity(new LoanPageDTO(loanPageDTOList, new PagingDTO(loanPageDTOList.size(), page, totalElements)),
-                HttpStatus.ACCEPTED);
+                HttpStatus.OK);
     }
 
     @Override
@@ -70,7 +70,7 @@ public class LoanServiceImpl implements LoanService {
         user.addLoan(new Loan(loan.getTotal(), user));
         DaoUser modifiedUser = this.userRepository.save(user);
         List<Loan> newLoans = new LinkedList<>(modifiedUser.getLoans());
-        return new ResponseEntity<>(new LoanDTO(newLoans.get(newLoans.size() - 1)), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(new LoanDTO(newLoans.get(newLoans.size() - 1)), HttpStatus.CREATED);
     }
 
     @Override

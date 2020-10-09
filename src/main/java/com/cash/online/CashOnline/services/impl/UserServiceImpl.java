@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
                 .stream()
                 .map(loan -> new LoanDTO(loan))
                 .collect(Collectors.toSet());
-        return new ResponseEntity<>(new UserDTO(user.get(), loans), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(new UserDTO(user.get(), loans), HttpStatus.OK);
     }
 
     @Override
