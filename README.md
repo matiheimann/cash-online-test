@@ -18,5 +18,5 @@
   - Se recomienda realizar la carga con la base de datos vacia sin que se hayan borrado elementos previamente. 
   - Modificar los datos de la base de datos
   - Ejecutar comandos:
-   - source venv/bin/activate
-   - python3 script_database.py
+      - source venv/bin/activate
+      - python3 script_database.py
