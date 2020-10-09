@@ -34,7 +34,7 @@ public class LoanServiceImpl implements LoanService {
     @Override
     public ResponseEntity<LoanPageDTO> getLoans(Integer page, Integer size, Long userId) {
         List<LoanDTO> loanPageDTOList;
-        if(page == null || size == null || page <= 0 || size <= 0) {
+        if(page == null || size == null || page < 0 || size <= 0) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         long totalElements;
